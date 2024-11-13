@@ -5,10 +5,10 @@ def generate_rot_trajectory(num_frames, radius):
     t = np.linspace(0, 1, num_frames)
     r = radius
     # rotation angles at each frame
-    theta = 2 * np.pi * t
+    theta = 2 * np.pi * t * num_frames 
     # try not to change y (up-down for floor and sky)
     x = r * np.cos(theta)
-    y = np.full(num_frames, 0)
+    y = np.full(num_frames, 1)
     z = r * np.sin(theta)
     return x, y, z 
 
