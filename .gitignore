@@ -13,4 +13,7 @@ __pycache__
 detectron2/
 data/
 tools/Fooocus/models/
+tools/DepthPro/checkpoints/
+tools/OneFormer/checkpoints/
+tools/StableDiffusion/lcm_ckpt/
 
