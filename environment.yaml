@@ -1,10 +1,10 @@
 name: vistadream
 channels:
+  - conda-forge
   - xformers
   - pyg
   - pytorch
   - nvidia
-  - conda-forge
 dependencies:
   - python=3.10.12
   - pip=24.0
