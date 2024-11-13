@@ -3,7 +3,7 @@ import numpy as np
 
 def generate_rot_trajectory(num_frames, radius):
     t = np.linspace(0, 1, num_frames)
-    r = radius
+    r = np.sin(2 * np.pi * t) * radius
     # rotation angles at each frame
     theta = np.pi * t
     # try not to change y (up-down for floor and sky)
