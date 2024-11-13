@@ -41,7 +41,7 @@ scene:
   
   mcs:
     steps: 10 # among 50 total steps
-    n_view: 8
+    n_view: 4
     rect_w: 0.7
     gsopt_iters: 256
   
