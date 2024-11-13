@@ -26,7 +26,7 @@ def look_at(camera_position, target_position):
     return rotation_matrix
 
 def rot_camera_poses(num_frames, radius, forward_ratio = 0.2, backward_ratio = 0.8, rotation_times = 0.3, look_at_times = 0.5):
-    x, y, z = generate_rot_trajectory(num_frames, radius*rotation_times, forward_ratio, backward_ratio)
+    x, y, z = generate_rot_trajectory(num_frames, radius)
     target_position = np.array([0,0,radius*look_at_times])
     camera_positions = np.vstack([x, y, z]).T
     camera_poses = []

@@ -2,6 +2,7 @@ import numpy as np
 from ops.sky import Sky_Seg_Tool
 from ops.utils import dpt2xyz
 from .spiral import spiral_camera_poses
+from .rot import rot_camera_poses
 
 class Trajectory_Generation():
     def __init__(self, 
@@ -26,6 +27,10 @@ class Trajectory_Generation():
 
     def _traj_spiral(self, nframe):
         trajs = spiral_camera_poses(nframe, self.radius, self.forward_ratio, self.backward_ratio)
+        return trajs
+    
+    def _traj_rot(self,nframe):
+        trajs = rot_camera_poses(nframe, self.radius, self.forward_ratio, self.backward_ratio)
         return trajs
 
     def __call__(self, nframe, xyz):
