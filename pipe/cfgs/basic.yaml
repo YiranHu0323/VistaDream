@@ -29,7 +29,7 @@ scene:
     outpaint_extend_times: 0.45
 
   traj: 
-    n_sample: 10
+    n_sample: 5
     traj_type: 'spiral'
     near_percentage: 5
     far_percentage: 95
@@ -40,7 +40,7 @@ scene:
     opt_iters_per_frame: 512
   
   mcs:
-    steps: 10 # among 50 total steps
+    steps: 5 # among 50 total steps
     n_view: 4
     rect_w: 0.7
     gsopt_iters: 256
