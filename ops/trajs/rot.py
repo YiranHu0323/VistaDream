@@ -5,11 +5,11 @@ def generate_rot_trajectory(num_frames, radius):
     t = np.linspace(0, 1, num_frames)
     r = radius
     # rotation angles at each frame
-    theta = 2 * np.pi * t * num_frames 
+    theta = np.pi * t
     # try not to change y (up-down for floor and sky)
     x = r * np.cos(theta)
-    y = np.full(num_frames, 1)
-    z = r * np.sin(theta)
+    y = r * np.sin(theta)
+    z = np.full(num_frames, 0)
     return x, y, z 
 
 def look_at(camera_position, target_position):
