@@ -7,7 +7,7 @@ def generate_rot_trajectory(num_frames, radius):
     theta = 2 * np.pi * t * num_frames 
     x = r * np.cos(theta)
     y = np.full(num_frames, 0)
-    z = -r * np.sin(theta)
+    z = r * np.sin(theta)
     return x, y, z 
 
 def look_at(camera_position, target_position):
