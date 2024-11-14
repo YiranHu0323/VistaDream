@@ -6,7 +6,7 @@ def generate_rot_trajectory(num_frames, radius):
     r = radius
     theta = 2 * np.pi * t
     x = r * np.cos(theta)
-    y = np.full(num_frames, 5)
+    y = np.full(num_frames, r)
     z = r * np.sin(theta)
     return x, y, z 
 
