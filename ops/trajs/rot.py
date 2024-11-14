@@ -2,12 +2,15 @@ import torch
 import numpy as np
 
 def generate_rot_trajectory(num_frames, radius):
-    t = np.linspace(0, 1, num_frames)
-    r = radius
-    theta = 2 * np.pi * t
-    x = r * np.cos(theta)
-    y = np.full(num_frames, r)
-    z = r * np.sin(theta)
+    # t = np.linspace(0, 1, num_frames)
+    # r = radius
+    # theta = 2 * np.pi * t
+    # x = r * np.cos(theta)
+    # y = np.full(num_frames, r)
+    # z = r * np.sin(theta)
+    y = np.linspace(0, 2*radius, num_frames)
+    x = np.zeros(num_frames)
+    z = np.zeros(num_frames)
     return x, y, z 
 
 def look_at(camera_position, target_position):
