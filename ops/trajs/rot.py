@@ -2,14 +2,20 @@ import torch
 import numpy as np
 
 def generate_rot_trajectory(num_frames, radius):
-    t = np.linspace(0, 1, num_frames)
-    r = np.sin(2 * np.pi * t) * radius
-    # rotation angles at each frame
-    theta = np.pi * t
-    # try not to change y (up-down for floor and sky)
-    x = r * np.cos(theta)
-    y = r * np.sin(theta)
-    z = np.full(num_frames, 0)
+    # t = np.linspace(0, 1, num_frames)
+    # r = np.sin(np.pi * t) * radius
+    # # rotation angles at each frame
+    # theta = np.pi * t
+    # # try not to change y (up-down for floor and sky)
+    # x = r * np.cos(theta)
+    # y = r * np.sin(theta)
+    # z = np.full(num_frames, 0)
+    t = np.linspace(0, np.pi, num_frames)  # Range from 0 to pi for half circle
+    
+    # Calculate coordinates for vertical arc movement
+    x = np.full(num_frames, radius)  # Fixed distance from origin
+    y = radius * np.cos(t)  # Vertical movement (height)
+    z = radius * np.sin(t)
     return x, y, z 
 
 def look_at(camera_position, target_position):
