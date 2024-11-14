@@ -31,8 +31,8 @@ scene:
   traj: 
     n_sample: 15
     traj_type: 'rot'
-    near_percentage: 5
-    far_percentage: 95
+    near_percentage: 40
+    far_percentage: 60
     traj_forward_ratio: 0.3
     traj_backward_ratio: 0.7
 
