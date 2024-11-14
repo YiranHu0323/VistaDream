@@ -3,7 +3,7 @@ import numpy as np
 
 def generate_rot_trajectory(num_frames, radius):
     t = np.linspace(0, 1, num_frames)
-    r = radius
+    r = radius * 5
     theta = 2 * np.pi * t
     x = r * np.cos(theta)
     y = np.full(num_frames, 5)
@@ -25,8 +25,7 @@ def look_at(camera_position, target_position):
 
 def rot_camera_poses(num_frames, radius, forward_ratio = 0.2, backward_ratio = 0.8, rotation_times = 0.3, look_at_times = 0.5):
     x, y, z = generate_rot_trajectory(num_frames, radius)
-    # target_position = np.array([0,0,radius*look_at_times])
-    target_position = np.array([0,0,0])
+    target_position = np.array([0,0,radius*look_at_times])
     camera_positions = np.vstack([x, y, z]).T
     camera_poses = []
     
