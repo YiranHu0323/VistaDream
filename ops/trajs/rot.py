@@ -4,7 +4,7 @@ import numpy as np
 def generate_rot_trajectory(num_frames, radius):
     t = np.linspace(0, 1, num_frames)
     r = radius
-    theta = np.pi * t * num_frames 
+    theta = 2 * np.pi * t * num_frames 
     x = r * np.cos(theta)
     y = np.full(num_frames, 0)
     z = -r * np.sin(theta)
