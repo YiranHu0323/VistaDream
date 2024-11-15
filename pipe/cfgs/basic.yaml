@@ -29,10 +29,10 @@ scene:
     outpaint_extend_times: 0.45
 
   traj: 
-    n_sample: 15
+    n_sample: 100
     traj_type: 'rot'
-    near_percentage: 30
-    far_percentage: 70
+    near_percentage: 20
+    far_percentage: 80
     traj_forward_ratio: 0.3
     traj_backward_ratio: 0.7
 
