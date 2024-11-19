@@ -19,6 +19,8 @@ from ops.gs.basic import Frame,Gaussian_Scene
 
 from ops.mcs import HackSD_MCS
 from pipe.refine_mvdps import Refinement_Tool_MCS
+
+from mask_debugger import debug_inpainting_pipeline
         
 class Pipeline():
     def __init__(self,cfg) -> None:
@@ -200,6 +202,9 @@ class Pipeline():
         dir = rgb_fn[:str.rfind(rgb_fn,'/')]
         rgb = Image.open(rgb_fn)
         self._coarse_scene(rgb)
+
+        debug_inpainting_pipeline(self.scene)
+        
         torch.cuda.empty_cache()
         # refinement
         self._MCS_Refinement()
