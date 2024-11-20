@@ -3,7 +3,8 @@ import numpy as np
 from ops.gs.basic import Frame
 
 class Enhanced_Inpaint:
-    def __init__(self, dilate_kernel_size=5, hole_min_size=100):
+    def __init__(self, cfg, dilate_kernel_size=5, hole_min_size=10):
+        self.cfg = cfg
         self.dilate_kernel_size = dilate_kernel_size
         self.hole_min_size = hole_min_size
         
@@ -16,7 +17,7 @@ class Enhanced_Inpaint:
     def find_and_expand_holes(self, frame: Frame):
         """Find holes in depth map and expand inpainting mask around them"""
         # Create mask for depth holes (where depth is invalid or very distant)
-        depth_holes = (frame.dpt >= frame.cfg.model.sky.value) | (frame.dpt == 0)
+        depth_holes = (frame.dpt >= self.cfg.model.sky.value) | (frame.dpt == 0)
         
         # Find connected components
         num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(

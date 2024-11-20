@@ -35,7 +35,7 @@ class Pipeline():
         self.removalor = Occlusion_Removal()
         self.checkor = Check()
 
-        self.enhanced_inpaint = Enhanced_Inpaint()
+        self.enhanced_inpaint = Enhanced_Inpaint(cfg=cfg)
 
     def _mkdir(self,dir):
         if not os.path.exists(dir):
