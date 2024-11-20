@@ -16,6 +16,12 @@ class Enhanced_Inpaint:
 
     def find_and_expand_holes(self, frame: Frame):
         """Find holes in depth map and expand inpainting mask around them"""
+
+        if not hasattr(frame, 'inpaint'):
+            frame.inpaint = np.zeros_like(frame.dpt, dtype=bool)
+        if not hasattr(frame, 'inpaint_wo_edge'):
+            frame.inpaint_wo_edge = np.zeros_like(frame.dpt, dtype=bool)
+
         # Create mask for depth holes (where depth is invalid or very distant)
         depth_holes = (frame.dpt >= self.cfg.model.sky.value) | (frame.dpt == 0)
         
@@ -35,17 +41,8 @@ class Enhanced_Inpaint:
                 expanded_hole = self.expand_holes(hole_mask)
                 additional_inpaint |= expanded_hole
         
-        # Update inpaint mask
-        if not hasattr(frame, 'inpaint'):
-            frame.inpaint = additional_inpaint
-        else:
-            frame.inpaint = frame.inpaint | additional_inpaint
-        
-        # Update inpaint_wo_edge
-        if not hasattr(frame, 'inpaint_wo_edge'):
-            frame.inpaint_wo_edge = additional_inpaint
-        else:
-            frame.inpaint_wo_edge = frame.inpaint_wo_edge | additional_inpaint
+        frame.inpaint |= additional_inpaint
+        frame.inpaint_wo_edge |= additional_inpaint
         
         return frame
 
