@@ -26,7 +26,7 @@ scene:
 
   outpaint:
     outpaint_selections: ['Left','Right','Top','Bottom']
-    outpaint_extend_times: 0.45
+    outpaint_extend_times: 0.8
 
   traj: 
     n_sample: 256
