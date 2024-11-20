@@ -35,10 +35,16 @@ class Enhanced_Inpaint:
                 expanded_hole = self.expand_holes(hole_mask)
                 additional_inpaint |= expanded_hole
         
-        # Combine with existing inpaint mask
-        frame.inpaint = frame.inpaint | additional_inpaint
-        # Update inpaint_wo_edge as well
-        if hasattr(frame, 'inpaint_wo_edge'):
+        # Update inpaint mask
+        if not hasattr(frame, 'inpaint'):
+            frame.inpaint = additional_inpaint
+        else:
+            frame.inpaint = frame.inpaint | additional_inpaint
+        
+        # Update inpaint_wo_edge
+        if not hasattr(frame, 'inpaint_wo_edge'):
+            frame.inpaint_wo_edge = additional_inpaint
+        else:
             frame.inpaint_wo_edge = frame.inpaint_wo_edge | additional_inpaint
         
         return frame
