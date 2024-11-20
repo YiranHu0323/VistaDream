@@ -15,31 +15,32 @@ class Enhanced_Inpaint:
         return expanded > 0
 
     def find_and_expand_holes(self, frame: Frame):
-        """Find holes in depth map and expand inpainting mask around them"""
-
+        print("Initial frame.inpaint_wo_edge type:", type(frame.inpaint_wo_edge))
+        print("Initial frame.inpaint_wo_edge shape:", 
+            frame.inpaint_wo_edge.shape if hasattr(frame.inpaint_wo_edge, 'shape') else None)
+        
         if not hasattr(frame, 'inpaint'):
             frame.inpaint = np.zeros_like(frame.dpt, dtype=bool)
-        if not hasattr(frame, 'inpaint_wo_edge'):
+        if frame.inpaint_wo_edge is None:  # Add this check
             frame.inpaint_wo_edge = np.zeros_like(frame.dpt, dtype=bool)
-
-        # Create mask for depth holes (where depth is invalid or very distant)
+        
         depth_holes = (frame.dpt >= self.cfg.model.sky.value) | (frame.dpt == 0)
         
-        # Find connected components
         num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(
             depth_holes.astype(np.uint8), connectivity=8
         )
         
-        # Create new mask for areas that need inpainting
         additional_inpaint = np.zeros_like(depth_holes)
         
-        # Process each hole
-        for i in range(1, num_labels):  # Skip background (0)
+        for i in range(1, num_labels):
             if stats[i, cv2.CC_STAT_AREA] > self.hole_min_size:
                 hole_mask = (labels == i)
-                # Expand this hole region
                 expanded_hole = self.expand_holes(hole_mask)
                 additional_inpaint |= expanded_hole
+        
+        # Convert to numpy arrays if needed
+        frame.inpaint = np.asarray(frame.inpaint, dtype=bool)
+        frame.inpaint_wo_edge = np.asarray(frame.inpaint_wo_edge, dtype=bool)
         
         frame.inpaint |= additional_inpaint
         frame.inpaint_wo_edge |= additional_inpaint
