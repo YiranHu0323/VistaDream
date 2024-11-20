@@ -21,6 +21,7 @@ from ops.mcs import HackSD_MCS
 from pipe.refine_mvdps import Refinement_Tool_MCS
 
 from pipe.mask_debugger import debug_inpainting_pipeline
+from ops.enhanced_inpaint import Enhanced_Inpaint
         
 class Pipeline():
     def __init__(self,cfg) -> None:
@@ -33,6 +34,8 @@ class Pipeline():
         # temp
         self.removalor = Occlusion_Removal()
         self.checkor = Check()
+
+        self.enhanced_inpaint = Enhanced_Inpaint()
 
     def _mkdir(self,dir):
         if not os.path.exists(dir):
@@ -141,6 +144,10 @@ class Pipeline():
     def _inpaint_next_frame(self,margin=32):
         frame = self._next_frame(margin)
         if frame is None: return None
+
+        frame = self.enhanced_inpaint.find_and_expand_holes(frame)
+        frame = self.enhanced_inpaint.process_frame_aggressive(frame)
+
         # inpaint rgb
         frame = self.rgb_inpaintor(frame)
         # inpaint dpt
