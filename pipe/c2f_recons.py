@@ -210,7 +210,7 @@ class Pipeline():
         rgb = Image.open(rgb_fn)
         self._coarse_scene(rgb)
 
-        debug_inpainting_pipeline(self.scene)
+        # debug_inpainting_pipeline(self.scene)
 
         torch.cuda.empty_cache()
         # refinement
