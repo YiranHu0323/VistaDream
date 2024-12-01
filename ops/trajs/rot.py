@@ -8,8 +8,8 @@ def generate_rot_trajectory(num_frames, radius):
     # x = r * np.cos(theta)
     # y = np.full(num_frames, r)
     # z = r * np.sin(theta)
-    y = np.linspace(0, radius, num_frames)
-    x = np.zeros(num_frames)
+    y = np.zeros(num_frames)
+    x = np.linspace(0, radius, num_frames)
     z = np.zeros(num_frames)
     return x, y, z 
 

@@ -145,8 +145,8 @@ class Pipeline():
         frame = self._next_frame(margin)
         if frame is None: return None
 
-        frame = self.enhanced_inpaint.find_and_expand_holes(frame)
-        frame = self.enhanced_inpaint.process_frame_aggressive(frame)
+        # frame = self.enhanced_inpaint.find_and_expand_holes(frame)
+        # frame = self.enhanced_inpaint.process_frame_aggressive(frame)
 
         # inpaint rgb
         frame = self.rgb_inpaintor(frame)
