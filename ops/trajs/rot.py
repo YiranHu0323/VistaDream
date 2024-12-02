@@ -34,7 +34,7 @@ def rot_camera_poses(num_frames, radius, forward_ratio = 0.2, backward_ratio = 0
     
     for i, pos in enumerate(camera_positions):
 
-        target_position = np.array([0, y[i], radius*look_at_times + z[i]])
+        target_position = np.array([0, 0, radius*look_at_times + z[i]])
 
         rotation_matrix = look_at(pos, target_position)
         transform_matrix = np.eye(4)
